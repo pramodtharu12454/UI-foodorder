@@ -1,10 +1,10 @@
-import UserHome from "@/foodbody/Home";
+import AdminDashboard from "@/foodbody/admindashboard";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <UserHome />
+      <AdminDashboard />
     </div>
   );
 };
