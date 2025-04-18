@@ -1,11 +1,13 @@
 export default function UserHome() {
-  const userName = "Pramod"; // Example, replace with dynamic data if needed
+  const userName = "Pramod";
 
   const products = Array.from({ length: 8 }, (_, i) => ({
     id: i + 1,
     name: `Product ${i + 1}`,
-    image: `https://res.cloudinary.com/demo/image/upload/sample.jpg`, // replace with real uploaded URLs
+    image: `https://res.cloudinary.com/demo/image/upload/sample.jpg`,
     price: (10 + i).toFixed(2),
+    quantity: 10 + i * 2,
+    category: i % 2 === 0 ? "Veg" : "Non-Veg",
   }));
 
   return (
@@ -29,10 +31,17 @@ export default function UserHome() {
               key={product.id}
               className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition"
             >
-              <div className="h-32 bg-gray-200 rounded mb-2" />
-              <img src="/veg.jpg" alt="image" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-32 w-full object-cover rounded mb-2"
+              />
               <h3 className="text-lg font-semibold">{product.name}</h3>
-              <p className="text-sm text-gray-500">$12.99</p>
+              <p className="text-sm text-gray-500">💰 ${product.price}</p>
+              <p className="text-sm text-gray-500">
+                📦 Qty: {product.quantity}
+              </p>
+              <p className="text-sm text-gray-500">🍽️ {product.category}</p>
             </div>
           ))}
         </div>

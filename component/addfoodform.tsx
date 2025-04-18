@@ -6,6 +6,9 @@ export default function AddFood() {
     name: "",
     ingredients: "",
     spicyLevel: "Low",
+    price: "",
+    quantity: "",
+    category: "Veg",
     image: "",
   });
 
@@ -23,16 +26,17 @@ export default function AddFood() {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset"); // 🔁 Replace with your preset
-
+    formData.append("upload_preset", "your_upload_preset"); // 🔁 Replace
     setUploading(true);
+
     const res = await fetch(
-      `https://api.cloudinary.com/v1_1/your_cloud_name/image/upload`, // 🔁 Replace cloud_name
+      `https://api.cloudinary.com/v1_1/your_cloud_name/image/upload`, // 🔁 Replace
       {
         method: "POST",
         body: formData,
       }
     );
+
     const data = await res.json();
     setForm({ ...form, image: data.secure_url });
     setUploading(false);
@@ -41,7 +45,7 @@ export default function AddFood() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submit Food:", form);
-    // Add your submission logic here (e.g., API call)
+    // Submit form to backend here
   };
 
   return (
@@ -73,6 +77,35 @@ export default function AddFood() {
           <option value="Low">Low 🌶️</option>
           <option value="Medium">Medium 🌶️🌶️</option>
           <option value="High">High 🌶️🌶️🌶️</option>
+        </select>
+
+        <input
+          type="number"
+          name="price"
+          placeholder="Price (e.g. 12.99)"
+          className="w-full p-2 border rounded"
+          value={form.price}
+          onChange={handleChange}
+        />
+
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Quantity"
+          className="w-full p-2 border rounded"
+          value={form.quantity}
+          onChange={handleChange}
+        />
+
+        <select
+          name="category"
+          className="w-full p-2 border rounded"
+          value={form.category}
+          onChange={handleChange}
+        >
+          <option value="Veg">Veg 🥦</option>
+          <option value="Non-Veg">Non-Veg 🍗</option>
+          <option value="Vegan">Vegan 🌱</option>
         </select>
 
         <input
